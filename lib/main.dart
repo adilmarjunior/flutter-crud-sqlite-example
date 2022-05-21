@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:persistence_example/database/AppDatabase.dart';
-import 'package:persistence_example/screens/ContactForm.dart';
 import 'package:persistence_example/screens/Dashboard.dart';
 
+import 'http/TransactionClient.dart';
 import 'models/Contact.dart';
+import 'models/Transaction.dart';
 
 void main() {
   runApp(PersistenceApp());
-  saveContact(Contact(0, 'Maria Jose', 2000)).then((id) {
-    findAll().then((contacts) => debugPrint(contacts.toString()));
-  });
+  findAll();
 }
 
 class PersistenceApp extends StatelessWidget {

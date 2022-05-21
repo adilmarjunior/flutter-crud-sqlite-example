@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:persistence_example/database/AppDatabase.dart';
+import 'package:persistence_example/database/dao/ContactDao.dart';
 import 'package:persistence_example/models/Contact.dart';
 
-class ContactForm extends StatefulWidget {
+class   ContactForm extends StatefulWidget {
   @override
   _ContactFormState createState() => _ContactFormState();
 }
 
 class _ContactFormState extends State<ContactForm> {
+  final ContactDao _contactDao = ContactDao();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _accountNumberController =
       TextEditingController();
@@ -51,7 +52,7 @@ class _ContactFormState extends State<ContactForm> {
                       final String name = _fullNameController.text;
                       final int? accountNumber = int.tryParse(_accountNumberController.text);
                       final Contact newContact = Contact(0, name, accountNumber!);
-                      saveContact(newContact).then((value) => Navigator.pop(context));
+                      _contactDao.saveContact(newContact).then((value) => Navigator.pop(context));
                     },
                   ),
                 ),
